@@ -1,0 +1,6 @@
+google-genai 
+sentence-transformers 
+pinecone 
+py2neo
+python-dotenv
+numpy
