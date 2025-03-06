@@ -3,13 +3,16 @@ from pinecone import Pinecone,ServerlessSpec
 from py2neo import Graph
 from google import genai
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
-model = SentenceTransformer("all-MiniLM-L6-v2")
-pinecone_api_key = "pcsk_4Nw6ea_Q3B2vNtvhPtWDH7PDaSSM3N9FAN1VNpcQi7pqRWqZ3x3gzf7Q4CDdcMsZ5iXNdA"
+model = SentenceTransformer(os.getenv("EMBEDDING_MODEL"))
+pinecone_api_key = os.getenv("PINECONE_API_KEY")
 client = Pinecone(api_key=pinecone_api_key)
 
-index_name = "chatbot-memory"
+index_name = os.getenv("INDEX_NAME")
 
 existing_indexes = [index['name'] for index in client.list_indexes()]
 if index_name not in existing_indexes:
@@ -25,7 +28,7 @@ if index_name not in existing_indexes:
 
 index = client.Index(index_name)
 
-graph = Graph("neo4j+s://58009442.databases.neo4j.io", auth=("neo4j", "CswbHH48VK0PBCOYBO1hAXeo-AMvJixnYmqiHBRkbNo"))
+graph = Graph(os.getenv("NEO4J_URI"), auth=(os.getenv("NEO4J_USERNAME"), os.getenv("NEO4J_PASSWORD")))
 
-genai_api_key = "AIzaSyCVxacwkdmS8Yy8rcxtOI5x6crazqVZfqI"
+genai_api_key = os.getenv("GEMINI_API_KEY")
 client = genai.Client(api_key=genai_api_key)

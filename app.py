@@ -1,4 +1,4 @@
-from utils import chat
+from utilities.utils import chat
 
 user_id = "lal"
 chat(user_id)

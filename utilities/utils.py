@@ -1,4 +1,4 @@
-from config import model, index
+from configurations.config import model, index
 from generation.generate_response import generate_response
 from storage.store import store_message
 from conversation import conversation_history

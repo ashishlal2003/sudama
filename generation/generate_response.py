@@ -1,4 +1,4 @@
-from config import client
+from configurations.config import client
 from retrieval.graph_retrieval import retrieve_graph_context
 from retrieval.vector_retrieval import retrieve_relevant_messages
 from conversation import conversation_history

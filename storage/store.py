@@ -1,4 +1,4 @@
-from config import model, index, graph
+from configurations.config import model, index, graph
 from extraction.relationship import determine_relationship_llm
 
 def store_message(user_id, message):

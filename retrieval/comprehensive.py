@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from config import graph
+from configurations.config import graph
 from extraction.entities import extract_entities
 from extraction.intent import extract_intent
 from retrieval.vector_retrieval import retrieve_relevant_messages

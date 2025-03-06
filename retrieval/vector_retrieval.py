@@ -1,4 +1,4 @@
-from config import model, index
+from configurations.config import model, index
 
 def retrieve_relevant_messages(user_id, query, top_k=5, min_score=0.5):
     """Retrieve relevant messages from the Pinecone index based on a query."""

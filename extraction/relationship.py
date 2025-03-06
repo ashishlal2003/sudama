@@ -1,4 +1,4 @@
-from config import client
+from configurations.config import client
 from extraction.predefined_relationships import PREDEFINED_RELATIONSHIPS
 
 def determine_relationship_llm(user_query):

@@ -1,5 +1,5 @@
 from extraction.relationship import determine_relationship_llm
-from config import graph
+from configurations.config import graph
 
 def retrieve_graph_context(user_id, query):
     """Retrieve relevant context from the Neo4j graph database, emphasizing relationships."""
