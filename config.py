@@ -25,7 +25,7 @@ if index_name not in existing_indexes:
 
 index = client.Index(index_name)
 
-graph = Graph("neo4j+sp://58009442.databases.neo4j.io", auth=("neo4j", "CswbHH48VK0PBCOYBO1hAXeo-AMvJixnYmqiHBRkbNo"))
+graph = Graph("neo4j+s://58009442.databases.neo4j.io", auth=("neo4j", "CswbHH48VK0PBCOYBO1hAXeo-AMvJixnYmqiHBRkbNo"))
 
 genai_api_key = "AIzaSyCVxacwkdmS8Yy8rcxtOI5x6crazqVZfqI"
 client = genai.Client(api_key=genai_api_key)

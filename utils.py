@@ -1,6 +1,7 @@
 from config import model, index
 from generation.generate_response import generate_response
 from storage.store import store_message
+from conversation import conversation_history
 
 def is_vector_db_empty():
   """Check if there are any stored messages in the Pinecone index for a given user."""
@@ -10,7 +11,6 @@ def is_vector_db_empty():
   return len(results.get("matches", [])) == 0
 
 def chat(user_id):
-  global conversation_history
 
   if user_id not in conversation_history:
     conversation_history[user_id] = []

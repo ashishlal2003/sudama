@@ -1,5 +1,5 @@
 from config import client
-from predefined_relationships import PREDEFINED_RELATIONSHIPS
+from extraction.predefined_relationships import PREDEFINED_RELATIONSHIPS
 
 def determine_relationship_llm(user_query):
     prompt = f"""
