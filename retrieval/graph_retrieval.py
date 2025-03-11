@@ -1,5 +1,5 @@
 from extraction.relationship import determine_relationship_llm
-from configurations.config import graph
+from configurations.config import graph 
 
 def retrieve_graph_context(user_id, query):
     """Retrieve relevant context from the Neo4j graph database, emphasizing relationships."""
@@ -10,13 +10,18 @@ def retrieve_graph_context(user_id, query):
     if relationship == "ASKED_ABOUT":
         relationship = "MENTIONED"
 
-    query = f"""
-    MATCH (u:User {{id: "{user_id}"}})-[r:{relationship}]-(q:Query)
+    valid_relationships = {"MENTIONED", "WORKING_ON", "INTERACTED_WITH", "READ_ABOUT"}
+    if relationship not in valid_relationships:
+        raise ValueError(f"Invalid relationship type: {relationship}")
+
+    cypher_query = f"""
+    MATCH (u:User {{id: $user_id}})-[r:{relationship}]-(q:Query)
     RETURN type(r) AS relationship, q.text AS query_text, labels(q) AS node_labels
     LIMIT 5
     """
 
-    results = graph.run(query).data()
+    with graph.session() as session:
+        results = session.run(cypher_query, user_id=user_id).data()
 
     context = [
         f'Relationship: {record["relationship"]}, Query Text: "{record["query_text"]}", Node Labels: {", ".join(record["node_labels"])}'
@@ -24,11 +29,3 @@ def retrieve_graph_context(user_id, query):
     ]
 
     return context
-
-PREDEFINED_RELATIONSHIPS = [
-    "ASKED_ABOUT",
-    "WORKING_ON",
-    "MENTIONED",
-    "INTERACTED_WITH",
-    "READ_ABOUT"
-]

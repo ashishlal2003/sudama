@@ -1,4 +1,4 @@
-from configurations.config import client
+from configurations.config import genai_client
 from extraction.predefined_relationships import PREDEFINED_RELATIONSHIPS
 
 def determine_relationship_llm(user_query):
@@ -14,7 +14,7 @@ def determine_relationship_llm(user_query):
     Respond with only the relationship name.
     """
 
-    response = client.models.generate_content(
+    response = genai_client.models.generate_content(
         model="gemini-2.0-flash",
         contents=prompt
     )
